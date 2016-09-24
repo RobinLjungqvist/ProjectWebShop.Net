@@ -9,6 +9,6 @@ namespace DAL
 {
     class DAL
     {
-        SqlConnection connection = new SqlConnection();
+        public SqlConnection connection = new SqlConnection();
     }
 }

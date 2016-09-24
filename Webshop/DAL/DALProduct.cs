@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,18 @@ namespace DAL
 
         public List<Product> GetAllProductsBySearch(Product product)
         {
-            string sql = "Get * from tblProduct WHERE ";
+            string sql = 
+                "SELECT "+
+                "prod.ProductName, " + 
+                "category.Category, " +
+                "size.Size, " + 
+                "color.Color, " +
+                "brand.Brand, " + 
+                "prod.Description, " +
+                "prod.PricePerUnit, " +
+                "prod.UnitsInStock, " +
+                "prod.PictureID " + 
+                "from tblProduct AS prod WHERE ";
 
             if (product.productID != null)
             {
@@ -77,6 +89,12 @@ namespace DAL
                     sql += "AND ";
                 sql += $"PictureID = {product.picture} ";
             }
+
+            sql += "INNER JOIN tblCategory AS category ON prod.CategoryID = category.CategoryID " +
+                   "INNER JOIN tblColor AS color ON color.ColorID = prod.ColorID " +
+                   "INNER JOIN tblSize AS size ON size.SizeID = prod.SizeID " +
+                   "INNER JOIN tblBrand AS brand ON brand.BrandID = prod.BrandID";
+
             List<Product> products = new List<Product>();
             var myCommand = new SqlCommand(sql, connection);
 
@@ -87,10 +105,10 @@ namespace DAL
                     Product item = new Product();
                     item.productID = Convert.ToInt32(datareader["ProductID"]);
                     item.name = $"{datareader["ProductName"]}";
-                    item.category = $"{datareader["CategoryID"]}";
-                    item.size = $"{datareader["SizeID"]}";
-                    item.Color = $"{datareader["ColorID"]}";
-                    item.brand = $"{datareader["BrandID"]}";
+                    item.category = $"{datareader["Category"]}";
+                    item.size = $"{datareader["Size"]}";
+                    item.Color = $"{datareader["Color"]}";
+                    item.brand = $"{datareader["Brand"]}";
                     item.description = $"{datareader["Description"]}";
                     item.ppu = Convert.ToDecimal(datareader["PricePerUnit"]);
                     item.unitsInStock = Convert.ToInt32(datareader["UnitsInStock"]);
