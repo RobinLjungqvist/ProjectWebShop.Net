@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using DAL;
 
 namespace DAL
 {
     class DAL
     {
-        internal SqlConnection connection = new SqlConnection();
+        public SqlConnection connection = new SqlConnection();
     }
 }
