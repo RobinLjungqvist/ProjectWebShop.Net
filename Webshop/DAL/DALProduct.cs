@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Webshop.Models;
-using System.Data.SqlClient;
+
 
 
 
@@ -128,6 +128,39 @@ namespace DAL
                 }
             }
             return products;
+        }
+        public void UpdateProduct(Product product)
+        {
+
+        }
+        public void DeleteProduct(Product product)
+        {
+            string sql = "DELETE FROM " + "tblProduct" + " WHERE " + "ProductID" + " = '" + product.productID + "'";
+            using (connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+        public void AddProduct(Product product)
+        {
+            string sql = "INSERT into tblProduct (ProductID,ProductName,Category,Size,Color,Brand,Description,PricePerUnit,UnitsInStock,PictureID) " +
+                   " VALUES ('" + product.productID + "', '" + product.name + "', '" + product.category + "', '" + product.size + "', '" + product.brand + "', '" + product.description + "', '" + product.ppu
+                    + "', '" + product.unitsInStock + "', '" + product.picture+"');";
+
+            using (connection)
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql,connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
         }
     }
 }
