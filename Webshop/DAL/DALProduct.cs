@@ -17,7 +17,7 @@ namespace DAL
 
         List<string> count = new List<string>();
         public List<Product> SearchProduct(Product product)
-        {
+        {  
             string sql = 
                 "SELECT "+
                 "prod.ProductName, " + 

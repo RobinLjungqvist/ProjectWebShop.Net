@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Webshop.Models;
+using Webshop.Models; 
 
 namespace DAL
 {
@@ -15,18 +15,25 @@ namespace DAL
         public List<User> GetAllUserBySearch(User user)
         {
             string sql =
-                "SELECT " + 
-                "user.Firstname"+
-                "user.Lastname"+
-                "user.Username"+
-                "user.Password"+
-                "user.StreetAdress"+
-                "zipcode.ZipcodeID"+
-                "city.CityID"+
-                "customergroup.CustomergroupID"+
-                "user.Admin"+
+                "SELECT " +
+                "user.UserID" +
+                "user.Firstname" +
+                "user.Lastname" +
+                "user.Username" +
+                "user.Password" +
+                "user.StreetAdress" +
+                "zipcode.ZipcodeID" +
+                "city.CityID" +
+                "customergroup.CustomergroupID" +
+                "user.Admin" +
                 "FROM tblUser AS user WHERE ";
-             
+
+            if (user.userID != null)
+            {
+                if (count.Count > 0)
+                    sql += "AND";
+                sql += $"UserID = {user.userID}";
+            } 
             if (user.firstname != null)
             {
                  if(count.Count > 0 )
@@ -51,6 +58,24 @@ namespace DAL
                 if (count.Count > 0)
                     sql += "AND";
                 sql += $"StreetAdress = {user.streetAdress}";
+            }
+            if (user.zipcodeID != null)
+            {
+                if (count.Count > 0)
+                    sql += "AND";
+                sql += $"ZipcodeID = {user.zipcodeID}";
+            }
+            if (user.cityID != null)
+            {
+                if (count.Count > 0)
+                    sql += "AND";
+                sql += $"CityID = {user.cityID}";
+            }
+            if (user.customergroupID != null)
+            {
+                if (count.Count > 0)
+                    sql += "AND";
+                sql += $"CustomergroupID = {user.customergroupID}";
             }
 
             sql += "INNER JOIN tblZipcode AS zipcode ON user.ZipcodeID = zipcode.ZipcodeID"
@@ -85,20 +110,34 @@ namespace DAL
             SqlCommand cmdUpdate = new SqlCommand("UPDATE tblUser SET FirstName = @newFirstName, LastName = @newLastName, Username = @newUsername, Password = @newPsw, StreetAdress = @newStreetAddress WHERE UserID = @UserID", connection);
 
             cmdUpdate.Parameters.AddWithValue("@UserID", user);
-
+            
 
         }
 
         public void InsertUser(User user)
-        {
-            SqlCommand insertUser = new SqlCommand("INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress) VALUES(@newFirstName, @newLastName, @newUsername, @newPsw, @newStreetAddress");
-            insertUser.Parameters.AddWithValue("@newFirstName", user.firstname);
-            insertUser.Parameters.AddWithValue("@newLastName", user.lastname);
-            insertUser.Parameters.AddWithValue("@newUsername", user.username);
-            insertUser.Parameters.AddWithValue("@newPsw", user.password);
-            insertUser.Parameters.AddWithValue("@newStreetAddress", user.streetAdress);
-            insertUser.ExecuteNonQuery();
+        { 
+                connection.Open();
+                SqlCommand insertUser = new SqlCommand("INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID, CustomergroupID) VALUES(@newFirstName, @newLastName, @newUsername, @newPsw, @newStreetAddress, @newZipcodeID, @newCityID, @newCustomergroupID");
+                insertUser.Parameters.AddWithValue("@newFirstName", user.firstname);
+                insertUser.Parameters.AddWithValue("@newLastName", user.lastname);
+                insertUser.Parameters.AddWithValue("@newUsername", user.username);
+                insertUser.Parameters.AddWithValue("@newPsw", user.password);
+                insertUser.Parameters.AddWithValue("@newStreetAddress", user.streetAdress);
+                insertUser.Parameters.AddWithValue("@newZipcodeID", user.zipcodeID);
+                insertUser.Parameters.AddWithValue("@newCityID", user.cityID);
+                insertUser.Parameters.AddWithValue("@newCustomergroupID", user.customergroupID);
+                insertUser.ExecuteNonQuery();
+            connection.Close();
+           
 
+        }
+
+        public void DeleteUser(User user)
+        {
+            connection.Open();
+            SqlCommand deleteUser = new SqlCommand("DELETE FROM tblUser WHERE UserID = @UserID", connection);
+            deleteUser.Parameters.AddWithValue("@UserID", user);
+            deleteUser.ExecuteNonQuery();
         }
 
     }
