@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Webshop.Models;
+using System.Data.SqlClient;
 
 
 
@@ -13,7 +14,8 @@ namespace DAL
     class DALProduct : DAL
     {
 
-        public List<Product> GetAllProductsBySearch(Product product)
+        List<string> count = new List<string>();
+        public List<Product> SearchProduct(Product product)
         {
             string sql = "Get * from tblProduct WHERE ";
 
@@ -22,54 +24,63 @@ namespace DAL
                 if (count.Count > 0)
                     sql += "'AND ";
                 sql += $"ProductID = {product.productID} ";
+                count.Add(sql);
             }
             if (product.name != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"ProductName = {product.name} ";
+                count.Add(sql);
             }
             if (product.category != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"CategoryID = {product.category} ";
+                count.Add(sql);
             }
             if (product.size != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"SizeID = {product.size} ";
+                count.Add(sql);
             }
             if (product.Color != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"ColorID = {product.Color} ";
+                count.Add(sql);
             }
             if (product.brand != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"BrandID = {product.brand} ";
+                count.Add(sql);
             }
             if (product.description != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"Description = {product.description} ";
+                count.Add(sql);
             }
             if (product.ppu != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"PricePerUnit = {product.ppu} ";
+                count.Add(sql);
             }
             if (product.unitsInStock != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
                 sql += $"UnitsInStock = {product.unitsInStock} ";
+                count.Add(sql);
             }
             if (product.picture != null)
             {
