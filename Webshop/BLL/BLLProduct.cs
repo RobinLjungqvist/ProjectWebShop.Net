@@ -25,7 +25,12 @@ namespace BLL
                 "prod.PricePerUnit, " +
                 "prod.UnitsInStock, " +
                 "prod.PictureID " +
-                "from tblProduct AS prod WHERE ";
+                "from tblProduct AS prod ";
+
+            sql += "INNER JOIN tblCategory AS category ON prod.CategoryID = category.CategoryID " +
+                "INNER JOIN tblColor AS color ON color.ColorID = prod.ColorID " +
+                "INNER JOIN tblSize AS size ON size.SizeID = prod.SizeID " +
+                "INNER JOIN tblBrand AS brand ON brand.BrandID = prod.BrandID WHERE ";
 
             if (product.productID != null)
             {
@@ -97,10 +102,7 @@ namespace BLL
                 sql += $"PictureID = {product.picture} ";
             }
 
-            sql += "INNER JOIN tblCategory AS category ON prod.CategoryID = category.CategoryID " +
-                   "INNER JOIN tblColor AS color ON color.ColorID = prod.ColorID " +
-                   "INNER JOIN tblSize AS size ON size.SizeID = prod.SizeID " +
-                   "INNER JOIN tblBrand AS brand ON brand.BrandID = prod.BrandID";
+        
 
             List<Product> products = new List<Product>();
             var dal = new DALGeneral();
