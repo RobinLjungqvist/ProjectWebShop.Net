@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL.cs" />
+    <Compile Include="DALCategory.cs" />
     <Compile Include="DALOrder.cs" />
     <Compile Include="DALProduct.cs" />
     <Compile Include="DALUser.cs" />
