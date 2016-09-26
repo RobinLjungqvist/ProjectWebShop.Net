@@ -41,7 +41,7 @@ namespace Databasetestoutput
             {
                 while (datareader.Read())
                 {
-                    tempname.Add($"{datareader["ProductName"]}, {datareader["Category"]},{datareader["Size"]},{datareader["Color"]},{datareader["Brand"]},{ datareader["Description"]},{datareader["PricePerUnit"]}{datareader["UnitsInStock"]},{datareader["PictureID"]}");
+                    tempname.Add($"{datareader["ProductName"]}, {datareader["Category"]},{datareader["Size"]},{datareader["Color"]},{datareader["Brand"]},{ datareader["Description"]},{datareader["PricePerUnit"]},{datareader["UnitsInStock"]},{datareader["PictureID"]}");
                 }
             }
 
