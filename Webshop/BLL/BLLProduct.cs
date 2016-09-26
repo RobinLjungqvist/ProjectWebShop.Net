@@ -45,7 +45,7 @@ namespace BLL
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Category = {product.category} ";
+                sql += $"Category = '{product.category}' ";
                 count.Add(sql);
             }
             if (product.size != null)
@@ -112,10 +112,10 @@ namespace BLL
                 Product item = new Product();
                 item.productID = Convert.ToInt32(row["ProductID"]);
                 item.name = $"{row["ProductName"]}";
-                item.category = $"{row["Category"]}";
-                item.size = $"{row["Size"]}";
-                item.Color = $"{row["Color"]}";
-                item.brand = $"{row["Brand"]}";
+                item.category = $"{row["CategoryID"]}";
+                item.size = $"{row["SizeID"]}";
+                item.Color = $"{row["ColorID"]}";
+                item.brand = $"{row["BrandID"]}";
                 item.description = $"{row["Description"]}";
                 item.ppu = Convert.ToDecimal(row["PricePerUnit"]);
                 item.unitsInStock = Convert.ToInt32(row["UnitsInStock"]);

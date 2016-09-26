@@ -17,7 +17,7 @@ namespace Databasetestoutput
         {
             var tempbll = new BLLProduct();
             var product = new Product();
-            product.ppu = 10;
+            product.category = "Tröja";
             List<Product> products = tempbll.SearchProduct(product);
 
             foreach (var item in products)
