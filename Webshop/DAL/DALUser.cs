@@ -8,7 +8,7 @@ using Webshop.Models;
 
 namespace DAL
 {
-    class DALUser : DAL
+    class DALUser : DALGeneral
     {
         List<string> count = new List<string>();
 

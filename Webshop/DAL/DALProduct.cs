@@ -12,7 +12,7 @@ using Webshop.Models;
 
 namespace DAL
 {
-    class DALProduct : DAL
+    class DALProduct : DALGeneral
     {
 
         List<string> count = new List<string>();
