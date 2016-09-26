@@ -50,6 +50,7 @@ namespace Databasetestoutput
                 Console.WriteLine(item);
             }
             connection.Close();
+            Console.ReadKey();
         }
     }
 }

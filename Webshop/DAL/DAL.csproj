@@ -40,18 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL.cs" />
-    <Compile Include="DALCategory.cs" />
+    <Compile Include="DALGeneral.cs" />
     <Compile Include="DALOrder.cs" />
     <Compile Include="DALProduct.cs" />
     <Compile Include="DALUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Webshop\Webshop.csproj">
-      <Project>{85719750-e686-4152-8895-c4e5296c0a36}</Project>
-      <Name>Webshop</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
