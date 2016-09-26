@@ -8,7 +8,7 @@ using Webshop.Models;
 
 namespace DAL
 {
-    class DALCategory: DAL
+    public class DALCategory: DAL
     {
         public Dictionary<int, string> GetCategories()
         {
