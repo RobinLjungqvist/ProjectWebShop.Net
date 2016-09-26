@@ -9,13 +9,14 @@ using System.Data;
 
 namespace BLL
 {
-   public class BLLProduct
+    public class BLLProduct
     {
         List<string> count = new List<string>();
         public List<Product> SearchProduct(Product product)
         {
             string sql =
                 "SELECT " +
+                "prod.ProductID, " +
                 "prod.ProductName, " +
                 "category.Category, " +
                 "size.Size, " +
@@ -43,7 +44,7 @@ namespace BLL
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"ProductName = {product.name} ";
+                sql += $"ProductName = '{product.name}' ";
                 count.Add(sql);
             }
             if (product.category != null)
@@ -57,42 +58,42 @@ namespace BLL
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Size = {product.size} ";
+                sql += $"Size = '{product.size}' ";
                 count.Add(sql);
             }
             if (product.Color != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Color = {product.Color} ";
+                sql += $"Color = '{product.Color}' ";
                 count.Add(sql);
             }
             if (product.brand != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Brand = {product.brand} ";
+                sql += $"Brand = '{product.brand}' ";
                 count.Add(sql);
             }
             if (product.description != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Description = {product.description} ";
+                sql += $"Description = '{product.description}' ";
                 count.Add(sql);
             }
             if (product.ppu != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"PricePerUnit = {product.ppu} ";
+                sql += $"PricePerUnit = '{product.ppu}' ";
                 count.Add(sql);
             }
             if (product.unitsInStock != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"UnitsInStock = {product.unitsInStock} ";
+                sql += $"UnitsInStock = '{product.unitsInStock}' ";
                 count.Add(sql);
             }
             if (product.picture != null)
@@ -102,7 +103,7 @@ namespace BLL
                 sql += $"PictureID = {product.picture} ";
             }
 
-        
+
 
             List<Product> products = new List<Product>();
             var dal = new DALGeneral();
@@ -114,10 +115,10 @@ namespace BLL
                 Product item = new Product();
                 item.productID = Convert.ToInt32(row["ProductID"]);
                 item.name = $"{row["ProductName"]}";
-                item.category = $"{row["CategoryID"]}";
-                item.size = $"{row["SizeID"]}";
-                item.Color = $"{row["ColorID"]}";
-                item.brand = $"{row["BrandID"]}";
+                item.category = $"{row["Category"]}";
+                item.size = $"{row["Size"]}";
+                item.Color = $"{row["Color"]}";
+                item.brand = $"{row["Brand"]}";
                 item.description = $"{row["Description"]}";
                 item.ppu = Convert.ToDecimal(row["PricePerUnit"]);
                 item.unitsInStock = Convert.ToInt32(row["UnitsInStock"]);
@@ -132,34 +133,27 @@ namespace BLL
         {
 
         }
-        //public void DeleteProduct(Product product)
-        //{
-        //    string sql = "DELETE FROM " + "tblProduct" + " WHERE " + "ProductID" + " = '" + product.productID + "'";
-        //    using (connection)
-        //    {
-        //        connection.Open();
-        //        using (SqlCommand command = new SqlCommand(sql, connection))
-        //        {
-        //            command.ExecuteNonQuery();
-        //        }
-        //        connection.Close();
-        //    }
-        //}
-        //public void AddProduct(Product product)
-        //{
-        //    string sql = "INSERT into tblProduct (ProductID,ProductName,Category,Size,Color,Brand,Description,PricePerUnit,UnitsInStock,PictureID) " +
-        //           " VALUES ('" + product.productID + "', '" + product.name + "', '" + product.category + "', '" + product.size + "', '" + product.brand + "', '" + product.description + "', '" + product.ppu
-        //            + "', '" + product.unitsInStock + "', '" + product.picture + "');";
+        public void DeleteProduct(Product product)
+        {
+            string sql = $"DELETE FROM tblProduct WHERE ProductID = {product.productID}";
+            var dal = new DALGeneral();
+            var affectedRows = dal.CrudData(sql);
 
-        //    using (connection)
-        //    {
-        //        connection.Open();
-        //        using (SqlCommand command = new SqlCommand(sql, connection))
-        //        {
-        //            command.ExecuteNonQuery();
-        //        }
-        //        connection.Close();
-        //    }
-        //}
+        }
+
+
+        public int AddProduct(Product product)
+        {
+            string sql = "DECLARE @cid int, @sid int, @colid int, @bid int;" +
+                        $"SELECT @cid = CategoryID FROM tblCategory AS c WHERE c.Category = '{product.category}'; " +
+                        $"SELECT @sid = SizeID FROM tblSize AS s WHERE s.Size = '{product.size}'; " +
+                        $"SELECT @colid = ColorID FROM tblColor AS color WHERE color.Color = '{product.Color}'; " +
+                        $"SELECT @bid = BrandID FROM tblBrand AS b WHERE b.Brand = '{product.brand}'; " +
+                        "INSERT INTO tblProduct (ProductName, CategoryID, SizeID, ColorID, BrandID, Description, PricePerUnit, UnitsInStock) " +
+                        $"VALUES ('{product.name}', @cid, @sid, @colid, @bid, '{product.description}', {product.ppu}, {product.unitsInStock})" ;
+            var dal = new DALGeneral();
+            var affectedRows = dal.CrudData(sql);
+            return affectedRows; 
+        }
     }
 }
