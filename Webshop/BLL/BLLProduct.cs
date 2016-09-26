@@ -9,7 +9,7 @@ using System.Data;
 
 namespace BLL
 {
-    class BLLProduct
+   public class BLLProduct
     {
         List<string> count = new List<string>();
         public List<Product> SearchProduct(Product product)
@@ -45,28 +45,28 @@ namespace BLL
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"CategoryID = {product.category} ";
+                sql += $"Category = {product.category} ";
                 count.Add(sql);
             }
             if (product.size != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"SizeID = {product.size} ";
+                sql += $"Size = {product.size} ";
                 count.Add(sql);
             }
             if (product.Color != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"ColorID = {product.Color} ";
+                sql += $"Color = {product.Color} ";
                 count.Add(sql);
             }
             if (product.brand != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"BrandID = {product.brand} ";
+                sql += $"Brand = {product.brand} ";
                 count.Add(sql);
             }
             if (product.description != null)
@@ -106,23 +106,23 @@ namespace BLL
             var dal = new DALGeneral();
             var dataTable = dal.GetData(sql);
 
-          
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        Product item = new Product();
-                        item.productID = Convert.ToInt32(row["ProductID"]);
-                        item.name = $"{row["ProductName"]}";
-                        item.category = $"{row["Category"]}";
-                        item.size = $"{row["Size"]}";
-                        item.Color = $"{row["Color"]}";
-                        item.brand = $"{row["Brand"]}";
-                        item.description = $"{row["Description"]}";
-                        item.ppu = Convert.ToDecimal(row["PricePerUnit"]);
-                        item.unitsInStock = Convert.ToInt32(row["UnitsInStock"]);
-                        item.picture = $"{row["PictureID"]}";
-                        products.Add(item); 
-                    }
-               
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Product item = new Product();
+                item.productID = Convert.ToInt32(row["ProductID"]);
+                item.name = $"{row["ProductName"]}";
+                item.category = $"{row["Category"]}";
+                item.size = $"{row["Size"]}";
+                item.Color = $"{row["Color"]}";
+                item.brand = $"{row["Brand"]}";
+                item.description = $"{row["Description"]}";
+                item.ppu = Convert.ToDecimal(row["PricePerUnit"]);
+                item.unitsInStock = Convert.ToInt32(row["UnitsInStock"]);
+                item.picture = $"{row["PictureID"]}";
+                products.Add(item);
+            }
+
             return products;
         }
 
