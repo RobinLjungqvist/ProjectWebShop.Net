@@ -58,7 +58,13 @@
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container Sidebar col-md-2">
+            <div class="Categories">
+
+            </div>
+
+        </div>
+        <div class="container body-content col-md-10">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
