@@ -9,18 +9,18 @@ namespace BLL
 {
     class BLLOrder
     {
-        public List<Order> SearchProduct(Order product)
+        public List<Order> SearchOrder(Order Order)
         {
             List<string> count = new List<string>();
             string sql =
                 "SELECT " +
-                "prod.ProductID, " +
-                "prod.ProductName, " +
-                "category.Category, " +
-                "size.Size, " +
-                "color.Color, " +
-                "brand.Brand, " +
-                "prod.Description, " +
+                "ord.OrderID, " +
+                "ord.Orderdate, " +
+                "ord.DeliveryAdress, " +
+                "city.City, " +
+                "zip.Zipcode, " +
+                "ord.CustomerID, " +
+                "ord.TotalPrice, " +
                 "prod.PricePerUnit, " +
                 "prod.UnitsInStock, " +
                 "prod.PictureID " +
