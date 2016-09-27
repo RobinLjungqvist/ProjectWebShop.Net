@@ -11,9 +11,10 @@ namespace BLL
 {
     public class BLLProduct
     {
-        List<string> count = new List<string>();
+        
         public List<Product> SearchProduct(Product product)
         {
+            List<string> count = new List<string>();
             string sql =
                 "SELECT " +
                 "prod.ProductID, " +
