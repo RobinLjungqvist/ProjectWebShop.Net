@@ -129,9 +129,14 @@ namespace BLL
             return products;
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateUser(Product product)
         {
-            // Implement later.
+            string updatestring = $"UPDATE tblProduct SET ProductName = @{product.name}, Category = @{product.category}, Size = @{product.size} " +
+                                  $"Color = @{product.Color}, Brand = @{product.brand} Description = @{ product.description}, PricePerUnit = @{ product.ppu} " +
+                                  $"UnitsInStock = @{product.unitsInStock} " +
+                                  $"WHERE ProductID = @ProductID";
+            var dal = new DALGeneral();
+            dal.CrudData(updatestring);
         }
         public void DeleteProduct(Product product)
         {
