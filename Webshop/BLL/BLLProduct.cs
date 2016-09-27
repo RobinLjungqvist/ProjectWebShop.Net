@@ -129,7 +129,7 @@ namespace BLL
             return products;
         }
 
-        public void UpdateUser(Product product)
+        public string UpdateUser(Product product)
         {
             string updatestring = $"UPDATE tblProduct SET ProductName = @{product.name}, Category = @{product.category}, Size = @{product.size} " +
                                   $"Color = @{product.Color}, Brand = @{product.brand} Description = @{ product.description}, PricePerUnit = @{ product.ppu} " +
@@ -137,19 +137,22 @@ namespace BLL
                                   $"WHERE ProductID = @ProductID";
             var dal = new DALGeneral();
             dal.CrudData(updatestring);
+            string success = CreateUpdateString(dal.CrudData(updatestring));
+            return success;
         }
-        public void DeleteProduct(Product product)
+        public string DeleteProduct(Product product)
         {
-            string sql = $"DELETE FROM tblProduct WHERE ProductID = {product.productID}";
+            string deletestring = $"DELETE FROM tblProduct WHERE ProductID = {product.productID}";
             var dal = new DALGeneral();
-            var affectedRows = dal.CrudData(sql);
+           string success = CreateDeleteString(dal.CrudData(deletestring));
+            return success;
 
         }
 
 
-        public int AddProduct(Product product)
+        public string AddProduct(Product product)
         {
-            string sql = "DECLARE @cid int, @sid int, @colid int, @bid int;" +
+            string addstring = "DECLARE @cid int, @sid int, @colid int, @bid int;" +
                         $"SELECT @cid = CategoryID FROM tblCategory AS c WHERE c.Category = '{product.category}'; " +
                         $"SELECT @sid = SizeID FROM tblSize AS s WHERE s.Size = '{product.size}'; " +
                         $"SELECT @colid = ColorID FROM tblColor AS color WHERE color.Color = '{product.Color}'; " +
@@ -157,8 +160,27 @@ namespace BLL
                         "INSERT INTO tblProduct (ProductName, CategoryID, SizeID, ColorID, BrandID, Description, PricePerUnit, UnitsInStock) " +
                         $"VALUES ('{product.name}', @cid, @sid, @colid, @bid, '{product.description}', {product.ppu}, {product.unitsInStock})" ;
             var dal = new DALGeneral();
-            var affectedRows = dal.CrudData(sql);
-            return affectedRows; 
+            string success = CreateAddString(dal.CrudData(addstring));
+            return success;
+        }
+        private string CreateDeleteString(int affectedrows)
+        {
+            if (affectedrows > 0)
+                return "The product was successfully deleted";
+            return "The product was not deleted";
+                
+        }
+        private string CreateUpdateString(int affectedrows)
+        {
+            if (affectedrows > 0)
+                return "The product was successfully updated";
+            return "The product was not updated";
+        }
+        private string CreateAddString(int affectedrows)
+        {
+            if (affectedrows > 0)
+                return "The product was successfully added";
+            return "The product was not added";
         }
     }
 }
