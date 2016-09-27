@@ -1,17 +1,15 @@
-﻿using BLL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
-using System.Data;
+using BLL.Models;
 
 namespace BLL
 {
-    public class BLLProduct
+    class BLLOrder
     {
-        public List<Product> SearchProduct(Product product)
+        public List<Order> SearchProduct(Order product)
         {
             List<string> count = new List<string>();
             string sql =
@@ -127,60 +125,6 @@ namespace BLL
             }
 
             return products;
-        }
-
-        public string UpdateUser(Product product)
-        {
-            string updatestring = $"UPDATE tblProduct SET ProductName = @{product.name}, Category = @{product.category}, Size = @{product.size} " +
-                                  $"Color = @{product.Color}, Brand = @{product.brand} Description = @{ product.description}, PricePerUnit = @{ product.ppu} " +
-                                  $"UnitsInStock = @{product.unitsInStock} " +
-                                  $"WHERE ProductID = @ProductID";
-            var dal = new DALGeneral();
-            dal.CrudData(updatestring);
-            string success = CreateUpdateString(dal.CrudData(updatestring));
-            return success;
-        }
-        public string DeleteProduct(Product product)
-        {
-            string deletestring = $"DELETE FROM tblProduct WHERE ProductID = {product.productID}";
-            var dal = new DALGeneral();
-           string success = CreateDeleteString(dal.CrudData(deletestring));
-            return success;
-
-        }
-
-
-        public string AddProduct(Product product)
-        {
-            string addstring = "DECLARE @cid int, @sid int, @colid int, @bid int;" +
-                        $"SELECT @cid = CategoryID FROM tblCategory AS c WHERE c.Category = '{product.category}'; " +
-                        $"SELECT @sid = SizeID FROM tblSize AS s WHERE s.Size = '{product.size}'; " +
-                        $"SELECT @colid = ColorID FROM tblColor AS color WHERE color.Color = '{product.Color}'; " +
-                        $"SELECT @bid = BrandID FROM tblBrand AS b WHERE b.Brand = '{product.brand}'; " +
-                        "INSERT INTO tblProduct (ProductName, CategoryID, SizeID, ColorID, BrandID, Description, PricePerUnit, UnitsInStock) " +
-                        $"VALUES ('{product.name}', @cid, @sid, @colid, @bid, '{product.description}', {product.ppu}, {product.unitsInStock})" ;
-            var dal = new DALGeneral();
-            string success = CreateAddString(dal.CrudData(addstring));
-            return success;
-        }
-        private string CreateDeleteString(int affectedrows)
-        {
-            if (affectedrows > 0)
-                return "The product was successfully deleted";
-            return "The product was not deleted";
-                
-        }
-        private string CreateUpdateString(int affectedrows)
-        {
-            if (affectedrows > 0)
-                return "The product was successfully updated";
-            return "The product was not updated";
-        }
-        private string CreateAddString(int affectedrows)
-        {
-            if (affectedrows > 0)
-                return "The product was successfully added";
-            return "The product was not added";
         }
     }
 }
