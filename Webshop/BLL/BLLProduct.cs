@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace BLL
 {
@@ -132,19 +133,12 @@ namespace BLL
         {
 
         }
-        //public void DeleteProduct(Product product)
-        //{
-        //    string sql = "DELETE FROM " + "tblProduct" + " WHERE " + "ProductID" + " = '" + product.productID + "'";
-        //    using (connection)
-        //    {
-        //        connection.Open();
-        //        using (SqlCommand command = new SqlCommand(sql, connection))
-        //        {
-        //            command.ExecuteNonQuery();
-        //        }
-        //        connection.Close();
-        //    }
-        //}
+        public void UpdateUser(Product product)
+        {
+            SqlCommand cmdUpdate = new SqlCommand("UPDATE tblUser SET FirstName = @newFirstName, LastName = @newLastName, Username = @newUsername, Password = @newPsw, StreetAdress = @newStreetAddress WHERE UserID = @UserID", connection);
+
+            cmdUpdate.Parameters.AddWithValue("@UserID", user);
+        }
         //public void AddProduct(Product product)
         //{
         //    string sql = "INSERT into tblProduct (ProductID,ProductName,Category,Size,Color,Brand,Description,PricePerUnit,UnitsInStock,PictureID) " +
