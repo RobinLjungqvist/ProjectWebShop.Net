@@ -129,12 +129,21 @@ namespace BLL
             return products;
         }
 
-        public string UpdateUser(Product product)
+        public string UpdateProduct(Product product)
         {
-            string updatestring = $"UPDATE tblProduct SET ProductName = @{product.name}, Category = @{product.category}, Size = @{product.size} " +
-                                  $"Color = @{product.Color}, Brand = @{product.brand} Description = @{ product.description}, PricePerUnit = @{ product.ppu} " +
-                                  $"UnitsInStock = @{product.unitsInStock} " +
-                                  $"WHERE ProductID = @ProductID";
+            string updatestring = "DECLARE @cid int, @sid int, @colid int, @bid int;" +
+                        $"SELECT @cid = CategoryID FROM tblCategory AS c WHERE c.Category = '{product.category}'; " +
+                        $"SELECT @sid = SizeID FROM tblSize AS s WHERE s.Size = '{product.size}'; " +
+                        $"SELECT @colid = ColorID FROM tblColor AS color WHERE color.Color = '{product.Color}'; " +
+                        $"SELECT @bid = BrandID FROM tblBrand AS b WHERE b.Brand = '{product.brand}'; " +
+                        $"UPDATE tblProduct SET ProductName = '{product.name}', "+
+                                               "CategoryID = @cid, SizeID = @sid, " +
+                                               "ColorID = @colid, " + 
+                                               "BrandID = @bid, "+
+                                              $"Description = '{product.description}', " + 
+                                              $"PricePerUnit = {product.ppu}, " +
+                                              $"UnitsInStock = {product.unitsInStock}, " +
+                                              $"WHERE ProductID = @ProductID";
             var dal = new DALGeneral();
             dal.CrudData(updatestring);
             string success = CreateUpdateString(dal.CrudData(updatestring));
