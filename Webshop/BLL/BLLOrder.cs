@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.Models;
+using DAL;
+using System.Data;
 
 namespace BLL
 {
     class BLLOrder
     {
-        public List<Order> SearchOrder(Order Order)
+        public List<Order> SearchOrder(Order order)
         {
             List<string> count = new List<string>();
             string sql =
@@ -21,110 +23,95 @@ namespace BLL
                 "zip.Zipcode, " +
                 "ord.CustomerID, " +
                 "ord.TotalPrice, " +
-                "prod.PricePerUnit, " +
-                "prod.UnitsInStock, " +
-                "prod.PictureID " +
-                "from tblProduct AS prod ";
+                "from tblOrderHead AS ord ";
 
-            sql += "INNER JOIN tblCategory AS category ON prod.CategoryID = category.CategoryID " +
-                "INNER JOIN tblColor AS color ON color.ColorID = prod.ColorID " +
-                "INNER JOIN tblSize AS size ON size.SizeID = prod.SizeID " +
-                "INNER JOIN tblBrand AS brand ON brand.BrandID = prod.BrandID WHERE ";
+            sql += "INNER JOIN tblCity AS c ON ord.CityID = c.CityID " +
+                "INNER JOIN tblZipcode AS zip ON zip.ZipcodeID = ord.ZipID WHERE ";
 
-            if (product.productID != null)
-            {
-                if (count.Count > 0)
-                    sql += "'AND ";
-                sql += $"ProductID = {product.productID} ";
-                count.Add(sql);
-            }
-            if (product.name != null)
+            if (order.OrderID != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"ProductName = '{product.name}' ";
+                sql += $"OrderID = {order.OrderID} ";
                 count.Add(sql);
             }
-            if (product.category != null)
+
+            if (order.CustomerID != null)
             {
                 if (count.Count > 0)
                     sql += "AND ";
-                sql += $"Category = '{product.category}' ";
-                count.Add(sql);
-            }
-            if (product.size != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"Size = '{product.size}' ";
-                count.Add(sql);
-            }
-            if (product.Color != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"Color = '{product.Color}' ";
-                count.Add(sql);
-            }
-            if (product.brand != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"Brand = '{product.brand}' ";
-                count.Add(sql);
-            }
-            if (product.description != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"Description = '{product.description}' ";
-                count.Add(sql);
-            }
-            if (product.ppu != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"PricePerUnit = '{product.ppu}' ";
-                count.Add(sql);
-            }
-            if (product.unitsInStock != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"UnitsInStock = '{product.unitsInStock}' ";
-                count.Add(sql);
-            }
-            if (product.picture != null)
-            {
-                if (count.Count > 0)
-                    sql += "AND ";
-                sql += $"PictureID = {product.picture} ";
+                sql += $"CustomerID = {order.CustomerID} ";
             }
 
 
 
-            List<Product> products = new List<Product>();
+            List<Order> orderList = new List<Order>();
             var dal = new DALGeneral();
             var dataTable = dal.GetData(sql);
 
 
             foreach (DataRow row in dataTable.Rows)
             {
-                Product item = new Product();
-                item.productID = Convert.ToInt32(row["ProductID"]);
-                item.name = $"{row["ProductName"]}";
-                item.category = $"{row["Category"]}";
-                item.size = $"{row["Size"]}";
-                item.Color = $"{row["Color"]}";
-                item.brand = $"{row["Brand"]}";
-                item.description = $"{row["Description"]}";
-                item.ppu = Convert.ToDecimal(row["PricePerUnit"]);
-                item.unitsInStock = Convert.ToInt32(row["UnitsInStock"]);
-                item.picture = $"{row["PictureID"]}";
-                products.Add(item);
+                Order item = new Order();
+                item.OrderID = Convert.ToInt32(row["OrderID"]);
+                item.Orderdate = Convert.ToDateTime(row["Orderdate"]);
+                item.DeliveryAdress = $"{row["DeliveryAdress"]}";
+                item.City = $"{row["City"]}";
+                item.Zipcode = Convert.ToInt32($"{row["Zipcode"]}");
+                item.CustomerID = Convert.ToInt32(row["Brand"]);
+                item.TotalPrice = Convert.ToDecimal(row["Description"]);
+                item.Products = GetOrderProducts(Convert.ToInt32(row["OrderID"]));
+                orderList.Add(item);
             }
 
-            return products;
+            return orderList;
+        }
+        public string UpdateOrder(Order order)
+        {
+            return "";
+        }
+        public string AddOrder(Order Order)
+        {
+            return "";
+        }
+        public string DeleteOrder(int OrderID)
+        {
+            return "";
+        }
+
+        private List<OrderProduct> GetOrderProducts(int OrderID)
+        {
+            string sql =
+                "SELECT " +
+                "od.OrderID, " +
+                "od.ProductID, " +
+                "p.ProductName, " +
+                "od.Quantity, " +
+                "od.Price " +
+                "from tblOrderDetails AS od ";
+
+            sql += $"INNER JOIN tblProduct AS p ON p.ProductID = od.ProductID WHERE od.OrderID = {OrderID}";
+
+            List<OrderProduct> orderProductList = new List<OrderProduct>();
+            var dal = new DALGeneral();
+            var dataTable = dal.GetData(sql);
+
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                OrderProduct item = new OrderProduct();
+                item.OrderID = Convert.ToInt32(row["OrderID"]);
+                item.ProductID = Convert.ToInt32(row["Orderdate"]);
+                item.ProductName = $"{row["DeliveryAdress"]}";
+                item.Quantity = Convert.ToInt32(row["City"]);
+                item.Price = Convert.ToInt32($"{row["Zipcode"]}");
+
+                orderProductList.Add(item);
+            }
+
+            return orderProductList;
+
         }
     }
+
 }
