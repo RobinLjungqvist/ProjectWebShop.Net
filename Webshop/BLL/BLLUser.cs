@@ -106,24 +106,25 @@ namespace BLL
 
         public void UpdateUser(User user)
         {
-            string updateUserQuery = "UPDATE tblUser SET FirstName = @newFirstName, LastName = @newLastName, Username = @newUsername, Password = @newPsw, StreetAdress = @newStreetAddress WHERE UserID = @UserID";
+            string updateUserQuery = $"UPDATE tblUser SET FirstName = @{user.firstname}, LastName = @{user.lastname}, Username = @{user.username}, Password = @{user.password}, StreetAdress = @{user.streetAdress}, CustomergroupID = @{user.customergroupID} WHERE UserID = @{user.userID}";
             var dal = new DALGeneral();
-            var dataTable = dal.GetData(updateUserQuery);
-            updateUserQuery.Parameters.AddWithValue("@UserID", user);
-         
-
+            dal.CrudData(updateUserQuery); 
         }
 
         public void DeleteUser(User user)
         {
-            string sql = $"DELETE FROM tblUser WHERE UserID = {user.userID}";
+            string deleteUserQuery = $"DELETE FROM tblUser WHERE UserID = {user.userID}";
             var dal = new DALGeneral();
-            var effectedRows = dal.CrudData(sql);
+            dal.CrudData(deleteUserQuery);
         }
 
-        public int AddUser(User product)
+        // Tog bort CustomerGroupID eftersom en user ska ju inte bestämma åt sig själv vilken customergroup den ska vara i utan det är Admins jobb att skriva det.
+        public void InsertUser(User user)
         {
-            string sql = "DECLARE @new"
+            string insertUser = $"INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID) VALUES('{user.firstname}', '{user.lastname}', '{user.password}', '{user.streetAdress}', '{user.streetAdress}', '{user.zipcodeID}', '{user.cityID}')";
+
+            var dal = new DALGeneral();
+            dal.CrudData(insertUser);
         }
     }
 } 
