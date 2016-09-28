@@ -72,6 +72,9 @@ namespace BLL
         }
         public string AddOrder(Order Order)
         {
+            Order.Products.ForEach(x => AddOrderProduct(Order));
+
+
             return "";
         }
         public string DeleteOrder(int OrderID)
@@ -111,6 +114,21 @@ namespace BLL
 
             return orderProductList;
 
+        }
+
+        private void AddOrderProduct(Order order)
+        {
+
+            if (order.Products.Count > 0)
+            {
+                foreach(var product in order.Products)
+                {
+                    var sql = "INSERT INTO tblOrderDetails (OrderID, ProductID, Quantity, Price) " + 
+                             $"VALUES ({product.OrderID}{product.ProductID}{product.Quantity}{product.Price})";
+                    var dal = new DALGeneral();
+                    dal.CrudData(sql);
+                } 
+            }
         }
     }
 
