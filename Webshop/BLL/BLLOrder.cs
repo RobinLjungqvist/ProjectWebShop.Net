@@ -66,16 +66,33 @@ namespace BLL
 
             return orderList;
         }
-        public string UpdateOrder(Order order)
+        public int UpdateOrder(Order order)
         {
-            return "";
+            var affectedRows = -1;
+            var sql = "DECLARE @cid INT; DECLARE @zid; " +
+                      $"SELECT @cid = c.CityID FROM tblCity AS c WHERE c.City = '{order.City}' " +
+                      $"SELECT @zid = z.ZipcodeID FROM tblZipcode WHERE z.Zipcode = {order.Zipcode} " +
+                      "UPDATE tblOrderHEAD AS oh " +
+                     $"SET oh.Orderdate={order.Orderdate}, " +
+                     $"oh.DeliveryAdress={order.DeliveryAdress} " +
+                     $"oh.City = @cid " +
+                     $"oh.Zipcode = @Zipcode " +
+                     $"oh.CustomerID = {order.CustomerID} " +
+                     $"oh.TotalPrice = {order.TotalPrice}" +
+                     $"WHERE oh.OrderID ={order.OrderID} ";
+            var dal = new DALGeneral();
+            affectedRows = dal.CrudData(sql);
+
+            UpdateOrderProduct(order);
+
+            return affectedRows;
         }
         public int AddOrder(Order order)
         {
             var affectedRows = -1;
 
             string sql = "DECLARE @zid int, @cid int; " +
-                        $"SELECT @zid = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{order.Zipcode}'; " +
+                        $"SELECT @zid = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = {order.Zipcode}; " +
                         $"SELECT @cid = CityID FROM tblCity AS c WHERE c.City = '{order.City}'; " +
                         "INSERT INTO tblOrderHead (Orderdate, DeliveryAdress, CityID, ZipcodeID, CustomerID, TotalPrice) " +
                         $"VALUES ({order.Orderdate}, '{order.DeliveryAdress}', @cid, @zid, '{order.CustomerID}', {order.TotalPrice})";
@@ -86,9 +103,15 @@ namespace BLL
             order.Products.ForEach(x => AddOrderProduct(order));
             return affectedRows;
         }
-        public string DeleteOrder(int OrderID)
+        public int DeleteOrder(Order order)
         {
-            return "";
+            var affectedRows = -1;
+            DeleteOrderProducts(order);
+
+            var sql = $"DELETE FROM tblOrderHead AS oh WHERE oh.OrderID = {order.OrderID}";
+            var dal = new DALGeneral();
+            affectedRows = dal.CrudData(sql);
+            return affectedRows;
         }
 
         private List<OrderProduct> GetOrderProducts(int OrderID)
@@ -137,6 +160,23 @@ namespace BLL
                     var dal = new DALGeneral();
                     dal.CrudData(sql);
                 } 
+            }
+        }
+        private void DeleteOrderProducts(Order order)
+        {
+            var sql = $"DELETE FROM tblOrderDetails AS od WHERE od.OrderID = {order.OrderID}";
+            var dal = new DALGeneral();
+            dal.CrudData(sql);
+        }
+        private void UpdateOrderProduct(Order order)
+        {
+            var dal = new DALGeneral();
+            foreach (var product in order.Products)
+            {
+                var sql = "UPDATE tblOrderDetails AS od " +
+                         $"SET Quantity={product.Quantity}, Price = {product.Price} " +
+                         $"WHERE od.OrderID ={product.OrderID} AND od.ProductID = {product.ProductID}";
+                dal.CrudData(sql);
             }
         }
     }
