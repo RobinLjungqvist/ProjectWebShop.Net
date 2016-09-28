@@ -167,7 +167,7 @@ namespace BLL
                         $"SELECT @colid = ColorID FROM tblColor AS color WHERE color.Color = '{product.Color}'; " +
                         $"SELECT @bid = BrandID FROM tblBrand AS b WHERE b.Brand = '{product.brand}'; " +
                         "INSERT INTO tblProduct (ProductName, CategoryID, SizeID, ColorID, BrandID, Description, PricePerUnit, UnitsInStock) " +
-                        $"VALUES ('{product.name}', @cid, @sid, @colid, @bid, '{product.description}', {product.ppu}, {product.unitsInStock})" ;
+                        $"VALUES ('{product.name}', @cid, @sid, @colid, @bid, '{product.description}', {product.ppu}, {product.unitsInStock})";
             var dal = new DALGeneral();
             string success = CreateAddString(dal.CrudData(addstring));
             return success;

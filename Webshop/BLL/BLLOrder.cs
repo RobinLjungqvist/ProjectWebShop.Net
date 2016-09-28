@@ -70,12 +70,21 @@ namespace BLL
         {
             return "";
         }
-        public string AddOrder(Order Order)
+        public int AddOrder(Order order)
         {
-            Order.Products.ForEach(x => AddOrderProduct(Order));
+            var affectedRows = -1;
+
+            string sql = "DECLARE @zid int, @cid int; " +
+                        $"SELECT @zid = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{order.Zipcode}'; " +
+                        $"SELECT @cid = CityID FROM tblCity AS c WHERE c.City = '{order.City}'; " +
+                        "INSERT INTO tblOrderHead (Orderdate, DeliveryAdress, CityID, ZipcodeID, CustomerID, TotalPrice) " +
+                        $"VALUES ({order.Orderdate}, '{order.DeliveryAdress}', @cid, @zid, '{order.CustomerID}', {order.TotalPrice})";
+            var dal = new DALGeneral();
+            affectedRows = dal.CrudData(sql);
 
 
-            return "";
+            order.Products.ForEach(x => AddOrderProduct(order));
+            return affectedRows;
         }
         public string DeleteOrder(int OrderID)
         {
