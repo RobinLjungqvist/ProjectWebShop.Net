@@ -47,7 +47,14 @@
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a href="../Sites/Nyheter.aspx">News</a></li>
                         <li><a href="../Sites/Kampanj.aspx">Sale</a></li>
-                        <li><a href="../Sites/Kampanj.aspx">Category</a></li>
+                        <li><div class="dropdown">
+                            <button class="btn-dropdown" type="button" data-toggle="dropdown">Category
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li>Category</li>
+                                </ul>
+                            </div> 
+                        </li> 
                         <li><div class="dropdown">
                             <button class="btn-dropdown" type="button" data-toggle="dropdown">Search
                                 <span class="caret"></span></button>
