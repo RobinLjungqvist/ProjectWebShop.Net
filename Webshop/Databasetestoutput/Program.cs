@@ -64,7 +64,7 @@ namespace Databasetestoutput
             var productBLL = new BLLProduct();
             var orderBLL = new BLLOrder();
             var order = new Order();
-            //order.OrderID = 2;
+            order.OrderID = 29;
             order.Orderdate = new DateTime(2016, 01, 05);
             order.Zipcode = 30651;
             order.CustomerID = 9;
@@ -73,14 +73,14 @@ namespace Databasetestoutput
 
             var prod = new OrderProduct();
             prod.ProductID = 6;
-            prod.Quantity = 1;
+            prod.Quantity = 10;
             prod.Price = 100;
 
             order.Products.Add(prod);
 
 
-            
-            
+
+
             //var order2 = new Order();
             //order2.OrderID = 2;
 
@@ -96,7 +96,7 @@ namespace Databasetestoutput
             //    {
             //        Console.WriteLine(product.ProductName);
             //    }
-                
+
             //}
 
             Console.ReadKey();

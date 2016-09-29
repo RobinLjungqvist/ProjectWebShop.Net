@@ -184,9 +184,9 @@ namespace BLL
             var dal = new DALGeneral();
             foreach (var product in order.Products)
             {
-                var sql = "UPDATE tblOrderDetails AS od " +
-                         $"SET Quantity={product.Quantity}, Price = {product.Price} " +
-                         $"WHERE od.OrderID ={product.OrderID} AND od.ProductID = {product.ProductID}";
+                var sql = "UPDATE tblOrderDetails " +
+                         $"SET Quantity = {product.Quantity}, Price = {product.Price} " +
+                         $"WHERE OrderID = {order.OrderID} AND ProductID = {product.ProductID}";
                 dal.CrudData(sql);
             }
         }
