@@ -35,22 +35,22 @@ namespace Databasetestoutput
             //var dal = new DALGeneral();
             //var dataTable = dal.GetData(sql);
 
-            var bll = new BLLUser();
+            //var bll = new BLLUser();
 
-            var jag = new User();
-            jag.UserID = 11;
-            jag.FirstName = "Kalle";
-            jag.LastName = "Fuling";
-            jag.UserName = "Pelikan";
-            jag.Password = "fågel";
-            jag.StreetAdress = "Himlen";
-            jag.ZipCode = 30651;
-            jag.IsAdmin = true;
-            jag.City = "Helsingborg";
-            jag.CustomerGroup = "VIP";
+            //var jag = new User();
+            //jag.UserID = 11;
+            //jag.FirstName = "Kalle";
+            //jag.LastName = "Fuling";
+            //jag.UserName = "Pelikan";
+            //jag.Password = "fågel";
+            //jag.StreetAdress = "Himlen";
+            //jag.ZipCode = 30651;
+            //jag.IsAdmin = true;
+            //jag.City = "Helsingborg";
+            //jag.CustomerGroup = "VIP";
 
-            bll.UpdateUser(jag);
-           
+            //bll.UpdateUser(jag);
+
 
             //var user1 = new User();
             //user1.FirstName = "Robin";
@@ -60,6 +60,18 @@ namespace Databasetestoutput
             //    Console.WriteLine($"{item.UserName}");
             //}
             //Console.WriteLine(tempbll.AddProduct(prod2));
+
+            var orderBLL = new BLLOrder();
+            var order = new Order();
+            order.OrderID = 2;
+            //order.Orderdate = new DateTime(2016, 09, 29);
+            //order.Zipcode = 0;
+            //order.CustomerID = 10;
+
+            var orders = orderBLL.SearchOrder(order);
+
+            orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} |" + order.Zipcode ) );
+
             Console.ReadKey();
         }
     }

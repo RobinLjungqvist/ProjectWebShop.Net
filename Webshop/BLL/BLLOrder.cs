@@ -9,7 +9,7 @@ using System.Data;
 
 namespace BLL
 {
-    class BLLOrder
+    public class BLLOrder
     {
         public List<Order> SearchOrder(Order order)
         {
@@ -19,14 +19,14 @@ namespace BLL
                 "ord.OrderID, " +
                 "ord.Orderdate, " +
                 "ord.DeliveryAdress, " +
-                "city.City, " +
+                "c.City, " +
                 "zip.Zipcode, " +
                 "ord.CustomerID, " +
                 "ord.TotalPrice " +
                 "from tblOrderHead AS ord ";
 
             sql += "INNER JOIN tblCity AS c ON ord.CityID = c.CityID " +
-                "INNER JOIN tblZipcode AS zip ON zip.ZipcodeID = ord.ZipID WHERE ";
+                "INNER JOIN tblZipcode AS zip ON zip.ZipcodeID = ord.ZipcodeID WHERE ";
 
             if (order.OrderID != null)
             {
@@ -58,9 +58,12 @@ namespace BLL
                 item.DeliveryAdress = $"{row["DeliveryAdress"]}";
                 item.City = $"{row["City"]}";
                 item.Zipcode = Convert.ToInt32($"{row["Zipcode"]}");
-                item.CustomerID = Convert.ToInt32(row["Brand"]);
-                item.TotalPrice = Convert.ToDecimal(row["Description"]);
-                item.Products = GetOrderProducts(Convert.ToInt32(row["OrderID"]));
+                item.CustomerID = Convert.ToInt32(row["CustomerID"]);
+                item.TotalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                if (order.Products != null)
+                {
+                    item.Products = GetOrderProducts(Convert.ToInt32(row["OrderID"]));
+                }
                 orderList.Add(item);
             }
 
