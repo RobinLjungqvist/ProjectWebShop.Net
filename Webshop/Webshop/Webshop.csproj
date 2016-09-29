@@ -133,13 +133,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Sites\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Index.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -149,6 +149,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="PicturesTest\1.png" />
+    <Content Include="PicturesTest\2.png" />
+    <Content Include="PicturesTest\3.png" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -184,6 +187,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="SitesLogIn\Login.aspx" />
+    <Content Include="SitesLogIn\MinaSidor.aspx" />
+    <Content Include="SitesLogIn\Registrering.aspx" />
+    <Content Include="Sites\Kampanj.aspx" />
+    <Content Include="Sites\KundKorg.aspx" />
+    <Content Include="Sites\KundService.aspx" />
+    <Content Include="Sites\Nyheter.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -239,6 +249,55 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SitesLogIn\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SitesLogIn\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SitesLogIn\MinaSidor.aspx.cs">
+      <DependentUpon>MinaSidor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SitesLogIn\MinaSidor.aspx.designer.cs">
+      <DependentUpon>MinaSidor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SitesLogIn\Registrering.aspx.cs">
+      <DependentUpon>Registrering.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SitesLogIn\Registrering.aspx.designer.cs">
+      <DependentUpon>Registrering.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\Kampanj.aspx.cs">
+      <DependentUpon>Kampanj.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\Kampanj.aspx.designer.cs">
+      <DependentUpon>Kampanj.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\KundKorg.aspx.cs">
+      <DependentUpon>KundKorg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\KundKorg.aspx.designer.cs">
+      <DependentUpon>KundKorg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\KundService.aspx.cs">
+      <DependentUpon>KundService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\KundService.aspx.designer.cs">
+      <DependentUpon>KundService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\Nyheter.aspx.cs">
+      <DependentUpon>Nyheter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\Nyheter.aspx.designer.cs">
+      <DependentUpon>Nyheter.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
