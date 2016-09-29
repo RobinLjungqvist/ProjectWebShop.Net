@@ -8,6 +8,7 @@ using DAL;
 using BLL;
 using BLL.Models;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Databasetestoutput
 {
@@ -15,9 +16,9 @@ namespace Databasetestoutput
     {
         static void Main(string[] args)
         {
-            var tempbll = new test();
-            var i = new Order();
-            List<Order> items = tempbll.GetAllOrders();
+            //var temp = new DALGeneral();
+            //var i = new Order();
+            //List<Order> items = tempbll.GetAllOrders();
             //var prod2 = new Product();
             //prod2.name = "Trucker Keps";
             //prod2.category = "KEPS";
@@ -28,11 +29,36 @@ namespace Databasetestoutput
             //prod2.size = "XS";
             //prod2.unitsInStock = 5;
             //prod2.picture = null;
+            //var sql = "SELECT * FROM tblUser";
 
-            foreach (var item in items)
-            {
-                Console.WriteLine($"{item.OrderID}, {item.Orderdate}, {item.TotalPrice}, {item.Zipcode}, {item.DeliveryAdress}, {item.Zipcode}, {item.City}");
-            }
+            //List<User> users = new List<User>();
+            //var dal = new DALGeneral();
+            //var dataTable = dal.GetData(sql);
+
+            var bll = new BLLUser();
+
+            var jag = new User();
+            jag.UserID = 11;
+            jag.FirstName = "Kalle";
+            jag.LastName = "Fuling";
+            jag.UserName = "Pelikan";
+            jag.Password = "fågel";
+            jag.StreetAdress = "Himlen";
+            jag.ZipCode = 30651;
+            jag.IsAdmin = true;
+            jag.City = "Helsingborg";
+            jag.CustomerGroup = "VIP";
+
+            bll.UpdateUser(jag);
+           
+
+            //var user1 = new User();
+            //user1.FirstName = "Robin";
+            //var users2 = bll.SearchUser(norris);
+            //foreach (var item in users2)
+            //{
+            //    Console.WriteLine($"{item.UserName}");
+            //}
             //Console.WriteLine(tempbll.AddProduct(prod2));
             Console.ReadKey();
         }
