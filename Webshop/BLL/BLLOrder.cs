@@ -22,7 +22,7 @@ namespace BLL
                 "city.City, " +
                 "zip.Zipcode, " +
                 "ord.CustomerID, " +
-                "ord.TotalPrice, " +
+                "ord.TotalPrice " +
                 "from tblOrderHead AS ord ";
 
             sql += "INNER JOIN tblCity AS c ON ord.CityID = c.CityID " +
@@ -74,11 +74,11 @@ namespace BLL
                       $"SELECT @zid = z.ZipcodeID FROM tblZipcode WHERE z.Zipcode = {order.Zipcode} " +
                       "UPDATE tblOrderHEAD AS oh " +
                      $"SET oh.Orderdate={order.Orderdate}, " +
-                     $"oh.DeliveryAdress={order.DeliveryAdress} " +
-                     $"oh.City = @cid " +
-                     $"oh.Zipcode = @Zipcode " +
-                     $"oh.CustomerID = {order.CustomerID} " +
-                     $"oh.TotalPrice = {order.TotalPrice}" +
+                     $"oh.DeliveryAdress={order.DeliveryAdress}, " +
+                     $"oh.City = @cid, " +
+                     $"oh.Zipcode = @Zipcode, " +
+                     $"oh.CustomerID = {order.CustomerID}, " +
+                     $"oh.TotalPrice = {order.TotalPrice} " +
                      $"WHERE oh.OrderID ={order.OrderID} ";
             var dal = new DALGeneral();
             affectedRows = dal.CrudData(sql);
