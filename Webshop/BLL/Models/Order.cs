@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    class Order
+    public class Order
     {
         public int? OrderID { get; set; }
         public DateTime Orderdate { get; set; }

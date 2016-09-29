@@ -17,16 +17,16 @@ namespace BLL
 
             string sql =
                 "SELECT " +
-                "user.UserID" +
-                "user.Firstname" +
-                "user.Lastname" +
-                "user.Username" +
-                "user.Password" +
-                "user.StreetAdress" +
-                "zipcode.ZipcodeID" +
-                "city.CityID" +
-                "customergroup.CustomergroupID" +
-                "user.Admin" +
+                "user.UserID, " +
+                "user.Firstname, " +
+                "user.Lastname, " +
+                "user.Username, " +
+                "user.Password, " +
+                "user.StreetAdress, " +
+                "zipcode.ZipcodeID, " +
+                "city.CityID, " +
+                "customergroup.CustomergroupID, " +
+                "user.Admin, " +
                 "FROM tblUser AS user ";
 
             sql += "INNER JOIN tblZipcode AS zipcode ON user.ZipcodeID = zipcode.ZipcodeID"+ 
@@ -131,7 +131,7 @@ namespace BLL
                      $"SELECT @zipID = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{user.zipcodeID}';" +
                      $"SELECT @cityID = CityID FROM tblCity AS c WHERE c.City = '{user.cityID}';" +
                         $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.customergroupID}';" +
-                         $"INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID, CustomergroupID) VALUES('{user.firstname}', '{user.lastname}', '{user.password}', '{user.streetAdress}', '{user.streetAdress}', '{user.zipcodeID}', '{user.cityID}', '{user.customergroupID}')";
+                         $"INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID, CustomergroupID) VALUES('{user.firstname}', '{user.lastname}', '{user.password}', '{user.streetAdress}', '{user.streetAdress}', @zipID , @cityID, '{user.customergroupID}')";
 
             var dal = new DALGeneral();
             dal.CrudData(addUser);
