@@ -1,9 +1,4 @@
-﻿body {
-}
-
-.advertise{
-
-}
+﻿ 
 
 .slideshow { 
     padding: 10px; 
@@ -17,3 +12,11 @@
     height: 200px;
 
 }
+
+.btn-dropdown{
+    background: none;
+    color: #999;
+    border:none;
+    margin-top:14px;
+}
+ 
