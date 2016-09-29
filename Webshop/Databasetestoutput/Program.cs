@@ -61,16 +61,43 @@ namespace Databasetestoutput
             //}
             //Console.WriteLine(tempbll.AddProduct(prod2));
 
+            var productBLL = new BLLProduct();
             var orderBLL = new BLLOrder();
             var order = new Order();
-            order.OrderID = 2;
-            //order.Orderdate = new DateTime(2016, 09, 29);
-            //order.Zipcode = 0;
-            //order.CustomerID = 10;
+            //order.OrderID = 2;
+            order.Orderdate = new DateTime(2016, 01, 05);
+            order.Zipcode = 30651;
+            order.CustomerID = 9;
+            order.City = "Helsingborg";
+            order.Products = new List<OrderProduct>();
 
-            var orders = orderBLL.SearchOrder(order);
+            var prod = new OrderProduct();
+            prod.ProductID = 6;
+            prod.Quantity = 1;
+            prod.Price = 100;
 
-            orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} |" + order.Zipcode ) );
+            order.Products.Add(prod);
+
+
+            
+            
+            //var order2 = new Order();
+            //order2.OrderID = 2;
+
+            //orderBLL.DeleteOrder(order2);
+
+            orderBLL.UpdateOrder(order);
+
+            //var orders = orderBLL.SearchOrder(order2);
+            //orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} | " + $"Zipcode: {order.Zipcode} | " + $"{order.Orderdate}"));
+            //foreach (var item in orders)
+            //{
+            //    foreach (var product in item.Products)
+            //    {
+            //        Console.WriteLine(product.ProductName);
+            //    }
+                
+            //}
 
             Console.ReadKey();
         }
