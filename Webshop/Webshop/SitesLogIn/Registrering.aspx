@@ -26,28 +26,28 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td style="width: 159px; text-align: right">Lastname:</td>
-            <td style="width: 233px">
+            <td style="width: 159px; text-align: right; height: 22px;">Lastname:</td>
+            <td style="width: 233px; height: 22px;">
                 <asp:TextBox ID="txtlastname" runat="server" Width="150px"></asp:TextBox>
             </td>
-            <td>
+            <td style="height: 22px">
                 <asp:Label ID="Label2" runat="server" ForeColor="Red" Text="*"></asp:Label>
             </td>
-            <td style="width: 142px">
+            <td style="width: 142px; height: 22px;">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Lastname requierd" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
-            <td>&nbsp;</td>
-            <td style="width: 157px; text-align: right">Password:</td>
-            <td style="width: 156px">
+            <td style="height: 22px"></td>
+            <td style="width: 157px; text-align: right; height: 22px;">Password:</td>
+            <td style="width: 156px; height: 22px;">
                 <asp:TextBox ID="txtpass" runat="server" TextMode="Password" Width="150px"></asp:TextBox>
             </td>
-            <td style="width: 11px">
+            <td style="width: 11px; height: 22px;">
                 <asp:Label ID="Label7" runat="server" ForeColor="Red" Text="*"></asp:Label>
             </td>
-            <td>
+            <td style="height: 22px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" EnableTheming="True" ErrorMessage="Password requierd" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
-            <td>&nbsp;</td>
+            <td style="height: 22px"></td>
         </tr>
         <tr>
             <td style="width: 159px; text-align: right">Zipcode:</td>
@@ -124,7 +124,7 @@
             <td>&nbsp;</td>
             <td style="width: 157px">&nbsp;</td>
             <td style="width: 156px">
-                <asp:Button ID="btnReg" runat="server" Height="25px" Text="Register" Width="158px" />
+                <asp:Button ID="btnReg" runat="server" Height="25px" Text="Register" Width="158px" OnClick="btnReg_Click" />
             </td>
             <td style="width: 11px">&nbsp;</td>
             <td>&nbsp;</td>
