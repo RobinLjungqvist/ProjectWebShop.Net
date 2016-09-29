@@ -1,0 +1,22 @@
+﻿ 
+
+.slideshow { 
+    padding: 10px; 
+    height: 350px;
+    width: auto;
+}
+
+.slideshow > div { 
+    position: absolute; 
+    margin-left: 8%;
+    height: 200px;
+
+}
+
+.btn-dropdown{
+    background: none;
+    color: #999;
+    border:none;
+    margin-top:14px;
+}
+ 

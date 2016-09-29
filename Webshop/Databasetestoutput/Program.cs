@@ -8,6 +8,7 @@ using DAL;
 using BLL;
 using BLL.Models;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Databasetestoutput
 {
@@ -15,26 +16,62 @@ namespace Databasetestoutput
     {
         static void Main(string[] args)
         {
-            var tempbll = new BLLProduct();
-            var product = new Product();
-            product.category = "KEPS";
-            List<Product> products = tempbll.SearchProduct(product);
-            var prod2 = new Product();
-            prod2.name = "Trucker Keps";
-            prod2.category = "KEPS";
-            prod2.Color = "Röd";
-            prod2.brand = "HM";
-            prod2.description = "En rätt nice Keps";
-            prod2.ppu = 100;
-            prod2.size = "XS";
-            prod2.unitsInStock = 5;
-            prod2.picture = null;
+            //var temp = new DALGeneral();
+            //var i = new Order();
+            //List<Order> items = tempbll.GetAllOrders();
+            //var prod2 = new Product();
+            //prod2.name = "Trucker Keps";
+            //prod2.category = "KEPS";
+            //prod2.Color = "Röd";
+            //prod2.brand = "HM";
+            //prod2.description = "En rätt nice Keps";
+            //prod2.ppu = 100;
+            //prod2.size = "XS";
+            //prod2.unitsInStock = 5;
+            //prod2.picture = null;
+            //var sql = "SELECT * FROM tblUser";
 
-            foreach (var item in products)
-            {
-                Console.WriteLine($"{item.productID}, {item.name}, {item.category}, {item.size}, {item.brand}, {item.Color}, {item.description}, {(int)item.ppu} Kronor, {item.unitsInStock}, {item.picture}");
-            }
+            //List<User> users = new List<User>();
+            //var dal = new DALGeneral();
+            //var dataTable = dal.GetData(sql);
+
+            //var bll = new BLLUser();
+
+            //var jag = new User();
+            //jag.UserID = 11;
+            //jag.FirstName = "Kalle";
+            //jag.LastName = "Fuling";
+            //jag.UserName = "Pelikan";
+            //jag.Password = "fågel";
+            //jag.StreetAdress = "Himlen";
+            //jag.ZipCode = 30651;
+            //jag.IsAdmin = true;
+            //jag.City = "Helsingborg";
+            //jag.CustomerGroup = "VIP";
+
+            //bll.UpdateUser(jag);
+
+
+            //var user1 = new User();
+            //user1.FirstName = "Robin";
+            //var users2 = bll.SearchUser(norris);
+            //foreach (var item in users2)
+            //{
+            //    Console.WriteLine($"{item.UserName}");
+            //}
             //Console.WriteLine(tempbll.AddProduct(prod2));
+
+            var orderBLL = new BLLOrder();
+            var order = new Order();
+            order.OrderID = 2;
+            //order.Orderdate = new DateTime(2016, 09, 29);
+            //order.Zipcode = 0;
+            //order.CustomerID = 10;
+
+            var orders = orderBLL.SearchOrder(order);
+
+            orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} |" + order.Zipcode ) );
+
             Console.ReadKey();
         }
     }

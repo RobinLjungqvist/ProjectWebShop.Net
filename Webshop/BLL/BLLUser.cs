@@ -17,69 +17,69 @@ namespace BLL
 
             string sql =
                 "SELECT " +
-                "user.UserID" +
-                "user.Firstname" +
-                "user.Lastname" +
-                "user.Username" +
-                "user.Password" +
-                "user.StreetAdress" +
-                "zipcode.ZipcodeID" +
-                "city.CityID" +
-                "customergroup.CustomergroupID" +
-                "user.Admin" +
-                "FROM tblUser AS user ";
+                "u.UserID, " +
+                "u.FirstName, " +
+                "u.LastName, " +
+                "u.Username, " +
+                "u.Password, " +
+                "u.StreetAdress, " +
+                "zipcode.Zipcode, " +
+                "city.City, " +
+                "customergroup.CustomerGroup, " +
+                "u.Admin " +
+                "FROM tblUser AS u ";
 
-            sql += "INNER JOIN tblZipcode AS zipcode ON user.ZipcodeID = zipcode.ZipcodeID"+ 
-              "INNER JOIN tblCity AS city ON user.CityID = city.CityID"+ "INNER JOIN tblCustomerGroup AS customergroup ON user.CustomergroupID = customergroup.CustomergroupID WHERE ";
+            sql += "INNER JOIN tblZipcode AS zipcode ON u.ZipcodeID = zipcode.ZipcodeID "+ 
+              "INNER JOIN tblCity AS city ON u.CityID = city.CityID "+ "INNER JOIN tblCustomerGroup AS customergroup ON u.CustomergroupID = customergroup.CustomergroupID WHERE ";
 
-            if (user.userID != null)
+            if (user.UserID != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"UserID = {user.userID}";
+                sql += $"UserID = {user.UserID}";
             }
-            if (user.firstname != null)
+            if (user.FirstName != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"FirstName = {user.firstname}";
+                sql += $"FirstName = '{user.FirstName}'";
 
             }
-            if (user.lastname != null)
+            if (user.LastName != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"LastName = {user.lastname}";
+                sql += $"LastName = '{user.LastName}'";
             }
-            if (user.username != null)
+            if (user.UserName != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"Username = {user.username}";
+                sql += $"Username = '{user.UserName}'";
             }
-            if (user.streetAdress != null)
+            if (user.StreetAdress != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"StreetAdress = {user.streetAdress}";
+                sql += $"StreetAdress = '{user.StreetAdress}'";
             }
-            if (user.zipcodeID != null)
+            if (user.ZipCode != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"ZipcodeID = {user.zipcodeID}";
+                sql += $"ZipcodeID = {user.ZipCode}";
             }
-            if (user.cityID != null)
+            if (user.City != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"CityID = {user.cityID}";
+                sql += $"CityID = {user.City}";
             }
-            if (user.customergroupID != null)
+            if (user.CustomerGroup != null)
             {
                 if (count.Count > 0)
                     sql += "AND";
-                sql += $"CustomergroupID = {user.customergroupID}";
+                sql += $"CustomergroupID = {user.CustomerGroup}";
             } 
 
             List<User> users = new List<User>();
@@ -89,15 +89,15 @@ namespace BLL
             foreach(DataRow row in dataTable.Rows)
                 {
                     User item = new User();
-                    item.userID = Convert.ToInt32(row["UserID"]);
-                    item.firstname = $"{row["FirstName"]}";
-                    item.lastname = $"{row["LastName"]}";
-                    item.username = $"{row["Username"]}";
-                    item.streetAdress = $"{row["StreetAdress"]}";
-                    item.zipcodeID = Convert.ToInt32(row["ZipcodeID"]);
-                    item.cityID = Convert.ToInt32(row["CityID"]);
-                    item.customergroupID = Convert.ToInt32(row["CustomergroupID"]);
-                    item.admin = Convert.ToBoolean(row["Admin"]);
+                    item.UserID = Convert.ToInt32(row["UserID"]);
+                    item.FirstName = $"{row["FirstName"]}";
+                    item.LastName = $"{row["LastName"]}";
+                    item.UserName = $"{row["Username"]}";
+                    item.StreetAdress = $"{row["StreetAdress"]}";
+                    item.ZipCode = Convert.ToInt32(row["Zipcode"]);
+                    item.City = $"{row["City"]}";
+                    item.CustomerGroup = $"{row["CustomerGroup"]}";
+                    item.IsAdmin = Convert.ToBoolean(row["Admin"]);
                     users.Add(item);
                 } 
             return users;
@@ -106,10 +106,10 @@ namespace BLL
         public string UpdateUser(User user)
         {
             string updateUserQuery = $"DECLARE @zipID int, @cityID int, @userGroupID int;" +
-                      $"SELECT @zipID = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{user.zipcodeID}';" +
-                      $"SELECT @cityID = CityID FROM tblCity AS c WHERE c.City = '{user.cityID}';" +
-                      $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.customergroupID}';" + 
-                      $"UPDATE tblUser SET FirstName = '{user.firstname}', LastName = '{user.lastname}', Username = '{user.username}', Password = '{user.password}', StreetAdress = '{user.streetAdress}', ZipcodeID = @zipID, @cityID = CityID, CustomergroupID = @userGroupID WHERE UserID = @userID";
+                      $"SELECT @zipID = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{user.ZipCode}';" +
+                      $"SELECT @cityID = CityID FROM tblCity AS c WHERE c.City = '{user.City}';" +
+                      $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.CustomerGroup}';" + 
+                      $"UPDATE tblUser SET FirstName = '{user.FirstName}', LastName = '{user.LastName}', Username = '{user.UserName}', Password = '{user.Password}', StreetAdress = '{user.StreetAdress}', ZipcodeID = @zipID, @cityID = CityID, CustomergroupID = @userGroupID WHERE UserID = {user.UserID}";
             var dal = new DALGeneral();
             dal.CrudData(updateUserQuery);
             string success = CreateUpdateString(dal.CrudData(updateUserQuery));
@@ -118,7 +118,7 @@ namespace BLL
 
         public string DeleteUser(User user)
         {
-            string deleteUserQuery = $"DELETE FROM tblUser WHERE UserID = {user.userID}";
+            string deleteUserQuery = $"DELETE FROM tblUser WHERE UserID = {user.UserID}";
             var dal = new DALGeneral();
             dal.CrudData(deleteUserQuery);
             string success = CreateDeleteString(dal.CrudData(deleteUserQuery));
@@ -127,14 +127,14 @@ namespace BLL
          
         public string AddUser(User user)
         {
+            int admin = user.IsAdmin ? 1 : 0;
             string addUser = $"DECLARE @zipID int, @cityID int, @userGroupID int;" + 
-                     $"SELECT @zipID = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{user.zipcodeID}';" +
-                     $"SELECT @cityID = CityID FROM tblCity AS c WHERE c.City = '{user.cityID}';" +
-                        $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.customergroupID}';" +
-                         $"INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID, CustomergroupID) VALUES('{user.firstname}', '{user.lastname}', '{user.password}', '{user.streetAdress}', '{user.streetAdress}', '{user.zipcodeID}', '{user.cityID}', '{user.customergroupID}')";
+                     $"SELECT @zipID = ZipcodeID FROM tblZipcode AS z WHERE z.Zipcode = '{user.ZipCode}';" +
+                     $"SELECT @cityID = CityID FROM tblCity AS c WHERE c.City = '{user.City}';" +
+                        $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.CustomerGroup}';" +
+                         $"INSERT INTO tblUser (FirstName, LastName, Username, Password, StreetAdress, ZipcodeID, CityID, CustomergroupID, Admin) VALUES('{user.FirstName}', '{user.LastName}', '{user.Password}', '{user.StreetAdress}', '{user.StreetAdress}', @zipID , @cityID, @userGroupID, {admin})";
 
             var dal = new DALGeneral();
-            dal.CrudData(addUser);
             string success = CreateAddString(dal.CrudData(addUser));
             return success;
         }

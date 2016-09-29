@@ -9,7 +9,7 @@ using System.Data;
 
 namespace BLL
 {
-    class BLLOrder
+    public class BLLOrder
     {
         public List<Order> SearchOrder(Order order)
         {
@@ -19,14 +19,14 @@ namespace BLL
                 "ord.OrderID, " +
                 "ord.Orderdate, " +
                 "ord.DeliveryAdress, " +
-                "city.City, " +
+                "c.City, " +
                 "zip.Zipcode, " +
                 "ord.CustomerID, " +
-                "ord.TotalPrice, " +
+                "ord.TotalPrice " +
                 "from tblOrderHead AS ord ";
 
             sql += "INNER JOIN tblCity AS c ON ord.CityID = c.CityID " +
-                "INNER JOIN tblZipcode AS zip ON zip.ZipcodeID = ord.ZipID WHERE ";
+                "INNER JOIN tblZipcode AS zip ON zip.ZipcodeID = ord.ZipcodeID WHERE ";
 
             if (order.OrderID != null)
             {
@@ -58,9 +58,12 @@ namespace BLL
                 item.DeliveryAdress = $"{row["DeliveryAdress"]}";
                 item.City = $"{row["City"]}";
                 item.Zipcode = Convert.ToInt32($"{row["Zipcode"]}");
-                item.CustomerID = Convert.ToInt32(row["Brand"]);
-                item.TotalPrice = Convert.ToDecimal(row["Description"]);
-                item.Products = GetOrderProducts(Convert.ToInt32(row["OrderID"]));
+                item.CustomerID = Convert.ToInt32(row["CustomerID"]);
+                item.TotalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                if (order.Products != null)
+                {
+                    item.Products = GetOrderProducts(Convert.ToInt32(row["OrderID"]));
+                }
                 orderList.Add(item);
             }
 
@@ -74,11 +77,11 @@ namespace BLL
                       $"SELECT @zid = z.ZipcodeID FROM tblZipcode WHERE z.Zipcode = {order.Zipcode} " +
                       "UPDATE tblOrderHEAD AS oh " +
                      $"SET oh.Orderdate={order.Orderdate}, " +
-                     $"oh.DeliveryAdress={order.DeliveryAdress} " +
-                     $"oh.City = @cid " +
-                     $"oh.Zipcode = @Zipcode " +
-                     $"oh.CustomerID = {order.CustomerID} " +
-                     $"oh.TotalPrice = {order.TotalPrice}" +
+                     $"oh.DeliveryAdress={order.DeliveryAdress}, " +
+                     $"oh.City = @cid, " +
+                     $"oh.Zipcode = @Zipcode, " +
+                     $"oh.CustomerID = {order.CustomerID}, " +
+                     $"oh.TotalPrice = {order.TotalPrice} " +
                      $"WHERE oh.OrderID ={order.OrderID} ";
             var dal = new DALGeneral();
             affectedRows = dal.CrudData(sql);
