@@ -79,14 +79,15 @@ namespace Databasetestoutput
             order.Products.Add(prod);
 
 
-
+            var orderDel = new Order();
+            orderDel.OrderID = 28;
 
             //var order2 = new Order();
             //order2.OrderID = 2;
 
             //orderBLL.DeleteOrder(order2);
 
-            orderBLL.UpdateOrder(order);
+            orderBLL.DeleteOrder(orderDel);
 
             //var orders = orderBLL.SearchOrder(order2);
             //orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} | " + $"Zipcode: {order.Zipcode} | " + $"{order.Orderdate}"));
