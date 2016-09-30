@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Webshop._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <link href="Content/Index.css" rel="stylesheet" />
+    <link href="Styles/Index.css" rel="stylesheet" />
 
     <script>
         $(".slideshow > div:gt(0)").hide();
@@ -17,7 +17,8 @@
     </script>
 
 
-     <div class="slideshow">
+           <div class="container">
+  <div class="slideshow">
    <div>
      <img src="PicturesTest/1.png">
    </div>
@@ -29,7 +30,7 @@
    </div>
     </div>
 
-    <div class="row">
+ <div class="row">
         <div class="col-md-4">
             <h2>Getting started</h2>
             <p>
@@ -58,6 +59,7 @@
                 <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
             </p>
         </div>
+    </div>
     </div>
 
 </asp:Content>

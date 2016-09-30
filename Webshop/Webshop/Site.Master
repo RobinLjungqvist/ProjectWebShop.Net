@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
-    <link href="Content/Index.css" rel="stylesheet" />
+    <link href="Styles/Index.css" rel="stylesheet" />
      
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div> 
-        <div class="container body-content col-md-12">
+        <div class="container">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
