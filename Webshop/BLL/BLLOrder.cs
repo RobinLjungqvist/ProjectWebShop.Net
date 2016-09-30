@@ -166,7 +166,7 @@ namespace BLL
             {
                 foreach(var product in order.Products)
                 {
-                    var sql = "INSERT INTO tblOrderDetails (OrderID, ProductID, Quantity, Price) " + 
+                    var sql = "INSERT INTO tbalOrderDetails (OrderID, ProductID, Quantity, Price) " + 
                              $"VALUES ('{order.OrderID}', '{product.ProductID}', '{product.Quantity}', '{product.Price}')";
                     var dal = new DALGeneral();
                     dal.CrudData(sql);

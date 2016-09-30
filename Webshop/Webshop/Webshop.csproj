@@ -143,7 +143,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Index.css" />
+    <Content Include="Scripts\WebsiteDesign\Slideshow.js" />
+    <Content Include="Styles\Index.css" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -161,6 +162,9 @@
     <Content Include="PicturesTest\1.png" />
     <Content Include="PicturesTest\2.png" />
     <Content Include="PicturesTest\3.png" />
+    <Content Include="PicturesTest\4.png" />
+    <Content Include="PicturesTest\5.png" />
+    <Content Include="PicturesTest\6.png" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
