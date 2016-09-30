@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webshop", "Webshop\Webshop.csproj", "{85719750-E686-4152-8895-C4E5296C0A36}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Databasetestoutput", "Databasetestoutput\Databasetestoutput.csproj", "{794C909A-D352-4556-B406-7939B7CA79A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputData", "WindowsFormsApplication1\InputData.csproj", "{0F72B632-9EAF-463E-A352-0DEC10869C96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebshop", "TestWebshop\TestWebshop.csproj", "{6D33EBAD-4EF6-4616-B392-05F612E6D3DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0F72B632-9EAF-463E-A352-0DEC10869C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F72B632-9EAF-463E-A352-0DEC10869C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F72B632-9EAF-463E-A352-0DEC10869C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D33EBAD-4EF6-4616-B392-05F612E6D3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D33EBAD-4EF6-4616-B392-05F612E6D3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D33EBAD-4EF6-4616-B392-05F612E6D3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D33EBAD-4EF6-4616-B392-05F612E6D3DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
