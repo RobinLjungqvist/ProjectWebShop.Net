@@ -26,7 +26,7 @@ namespace Webshop.Sites
                                           $"<label>{productToDisplay.name}</label>" + 
                 "<div>";
 
-            var productToCart = productList[index];
+            //var productToCart = productList[index];
         }
     }
 }
