@@ -2,21 +2,8 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="Styles/Index.css" rel="stylesheet" />
-
-    <script>
-        $(".slideshow > div:gt(0)").hide();
-
-        setInterval(function () {
-            $('.slideshow > div:first')
-              .fadeOut(1000)
-              .next()
-              .fadeIn(1000)
-              .end()
-              .appendTo('.slideshow');
-        }, 3000);
-    </script>
-
-
+    <script src="Scripts/WebsiteDesign/Slideshow.js"></script>
+     
            <div class="container">
   <div class="slideshow">
    <div>
