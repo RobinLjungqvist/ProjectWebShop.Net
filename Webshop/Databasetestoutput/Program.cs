@@ -61,36 +61,37 @@ namespace Databasetestoutput
             //}
             //Console.WriteLine(tempbll.AddProduct(prod2));
 
-            var productBLL = new BLLProduct();
-            var orderBLL = new BLLOrder();
-            var order = new Order();
-            order.OrderID = 29;
-            order.Orderdate = new DateTime(2016, 01, 05);
-            order.Zipcode = 30651;
-            order.CustomerID = 9;
-            order.City = "Helsingborg";
-            order.Products = new List<OrderProduct>();
+            //var productBLL = new BLLProduct();
+            //var orderBLL = new BLLOrder();
+            //var order = new Order();
+            //order.OrderID = 29;
+            //order.Orderdate = new DateTime(2016, 01, 05);
+            //order.Zipcode = 30651;
+            //order.CustomerID = 9;
+            //order.City = "Helsingborg";
+            //order.Products = new List<OrderProduct>();
 
-            var prod = new OrderProduct();
-            prod.ProductID = 6;
-            prod.Quantity = 10;
-            prod.Price = 100;
+            //var prod = new OrderProduct();
+            //prod.ProductID = 6;
+            //prod.Quantity = 10;
+            //prod.Price = 100;
 
-            order.Products.Add(prod);
+            //order.Products.Add(prod);
 
 
-            var orderDel = new Order();
-            orderDel.OrderID = 29;
+            //var orderDel = new Order();
+            //orderDel.OrderID = 29;
 
             //var order2 = new Order();
             //order2.OrderID = 2;
 
-            //orderBLL.DeleteOrder(order2);
+            ////orderBLL.DeleteOrder(order2);
 
-            //orderBLL.DeleteOrder(orderDel);
+            ////orderBLL.DeleteOrder(orderDel);
+            //var orderBLL = new BLLOrder();
 
             //var orders = orderBLL.SearchOrder(order2);
-            //orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} | " + $"Zipcode: {order.Zipcode} | " + $"{order.Orderdate}"));
+            //orders.ForEach(x => Console.WriteLine(x.CustomerID + " " + x.DeliveryAdress + $" OrderID = {x.OrderID} | " + $"Zipcode: {order2.Zipcode} | " + $"{order2.Orderdate}"));
             //foreach (var item in orders)
             //{
             //    foreach (var product in item.Products)
