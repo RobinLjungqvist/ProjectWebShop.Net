@@ -111,7 +111,6 @@ namespace BLL
                       $"SELECT @userGroupID = CustomerGroupID FROM tblCustomerGroup AS cg WHERE cg.CustomerGroup = '{user.CustomerGroup}';" + 
                       $"UPDATE tblUser SET FirstName = '{user.FirstName}', LastName = '{user.LastName}', Username = '{user.UserName}', Password = '{user.Password}', StreetAdress = '{user.StreetAdress}', ZipcodeID = @zipID, @cityID = CityID, CustomergroupID = @userGroupID WHERE UserID = {user.UserID}";
             var dal = new DALGeneral();
-            dal.CrudData(updateUserQuery);
             string success = CreateUpdateString(dal.CrudData(updateUserQuery));
             return success;
         }
@@ -120,7 +119,6 @@ namespace BLL
         {
             string deleteUserQuery = $"DELETE FROM tblUser WHERE UserID = {user.UserID}";
             var dal = new DALGeneral();
-            dal.CrudData(deleteUserQuery);
             string success = CreateDeleteString(dal.CrudData(deleteUserQuery));
             return success;
         }
